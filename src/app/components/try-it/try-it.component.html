@@ -1,0 +1,66 @@
+<ng-container *ngIf="method">
+  <form *ngIf="form" [formGroup]="form">
+    <ng-container *ngFor="let cvGroup of form.controls | keyvalue">
+      <ng-container *ngIf="cvGroup.value | asFormGroup as formGroup" [formGroup]="formGroup">
+        <ng-container *ngIf="(formGroup.controls | keyvalue)?.length">
+          <h3>{{cvGroup.key | titlecase }}</h3>
+          <div class="control" *ngFor="let cvControl of formGroup.controls | keyvalue" [formGroupName]="cvControl.key">
+            <ng-container *ngIf="cvControl.value?.value as param" [ngSwitch]="param['schema']['type']">
+              <ng-container *ngSwitchCase="'boolean'">
+                <input id="param_{{param['name']}}" type="checkbox" formControlName="value" />
+                <label for="param_{{param['name']}}"> {{param['name'] + (param['required'] ? ' *' : '')}}</label>
+              </ng-container>
+              <ng-container *ngSwitchCase="'array'">
+                <div>{{param['name'] + (param['required'] ? ' *' : '')}}</div>
+                <button
+                  [attr.data-method]="method.method"
+                >+</button>
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                <select formControlName="value" *ngIf="param['schema']['enum'] as enumValues; else text">
+                  <option value="">{{param['name'] + (param['required'] ? ' *' : '')}}</option>
+                  <option *ngFor="let option of enumValues">{{option}}</option>
+                </select>
+                <ng-template #text>
+                  <input formControlName="value" [placeholder]="param['name'] + (param['required'] ? ' *' : '')" />
+                </ng-template>
+
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <div [ngSwitch]="bodyContentType" *ngIf="form.get('body')">
+      <h3>Body ({{bodyContentType}})</h3>
+      <div class="control">
+        <textarea *ngSwitchCase="'application/json'" formControlName="body"></textarea>
+      </div>
+      <ng-container *ngSwitchDefault>Not supported yet</ng-container>
+    </div>
+
+
+    <button
+      [attr.data-method]="method.method"
+      [attr.disabled]="form.invalid ? '' : null"
+      (click)="sendRequest$.next(method)"
+    >Send request</button>
+  </form>
+
+
+  <ng-container *ngIf="tryIt$ | async as tryIt">
+    <ng-container *ngIf="!isError(tryIt)">
+      <h3>Response - {{tryIt.status }} ({{tryIt.statusText}})</h3>
+      <pre class="code language-json" *ngIf="!isPlain" appHighlightJs>{{tryIt?.body | json}}</pre>
+      <pre class="code language-json" *ngIf="isPlain">{{tryIt.body}}</pre>
+    </ng-container>
+    <ng-container *ngIf="isError(tryIt)">
+      <b> - {{tryIt.status }} ({{tryIt.statusText}}). {{tryIt.message}}</b>
+      <h3>Result</h3>
+      <pre class="code language-json">{{tryIt.error | json}}</pre>
+    </ng-container>
+
+  </ng-container>
+</ng-container>

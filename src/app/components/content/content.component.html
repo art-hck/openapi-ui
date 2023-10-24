@@ -1,0 +1,3 @@
+<ng-container *ngFor="let content of content | keyvalue">
+    <pre class="code language-json" *ngIf="content.value.schema as schema">{{propertiesToObject(schema) | json}}</pre>
+</ng-container>

@@ -1,1 +1,167 @@
-/* You can add global styles to this file, and also import other style files */
+@import "normalize.css";
+@import "highlight.js/styles/intellij-light.css";
+@import "flex";
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font: 14px "Segoe UI"
+}
+
+a {
+  text-decoration: none;
+  color: #186faf;
+  cursor: pointer;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+
+  a {
+    color: #fff;
+  }
+}
+h2 {
+  margin-bottom: 1rem;
+}
+
+figure {
+  margin: 0;
+}
+
+input[type=text], input:not([type]), textarea, select {
+  border: 1px #ccc solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[data-stretch] {
+    display: block;
+    width: 100%;
+  }
+}
+
+input[type=text], input:not([type]) {
+  height: 40px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  color: #fff;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.code {
+  font-size: 14px;
+  padding: 5px;
+  border: 1px #ccc solid;
+  border-radius: 4px;
+  background: #f5f5f5;
+  max-height: 400px;
+  max-width: 600px;
+  overflow: auto;
+  margin: 0;
+}
+
+[data-method] {
+  color: #fff;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  line-height: normal;
+}
+
+[data-method=get] {
+  background: #186faf;
+}
+
+[data-method=post] {
+  background: #2f8132;
+}
+
+[data-method=put] {
+  background: #95507c;
+}
+
+[data-method=delete] {
+  background: #cc3333;
+}
+
+[data-method=patch] {
+  background: #bf581d;
+}
+
+[data-svg-icon] {
+  width: 14px;
+  height: 14px;
+}
+
+.required {
+  color: #cc3333;
+}
+
+.highlight {
+  background: yellow;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.secondary {
+  color: #999;
+}
+
+.control {
+  margin: .5rem 0;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #999 #fff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: inherit;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 10px;
+  border: 3px solid #fff;
+}
+
+
+select:invalid { color: gray; }
+label {
+  user-select: none;
+}

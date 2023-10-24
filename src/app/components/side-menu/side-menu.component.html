@@ -1,0 +1,10 @@
+<nav class="app-menu" *ngIf="methods">
+  <a *ngFor="let method of methods; trackBy: trackBy" routerLink="." queryParamsHandling="merge"
+     [queryParams]="{index: method.index}"
+     appRlaScrollIntoView
+     routerLinkActive="active"
+     [title]="method.operation.summary ?? method.operation.description">
+    <span class="app-menu-method" [attr.data-method]="method.method">{{method.method}}</span>
+    <span [innerHTML]="method.path | highlightParameter: route.snapshot.queryParams['q']"></span>
+  </a>
+</nav>

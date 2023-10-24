@@ -1,0 +1,24 @@
+<ng-container *ngIf="getParametersParsed(parameters) as parsed">
+    <table>
+        <tr>
+            <th [style.width.px]="120">name</th>
+            <th [style.width.px]="70">required</th>
+            <th [style.width.px]="50">in</th>
+            <th [style.width.px]="280">description</th>
+            <th [style.width.px]="280">type</th>
+        </tr>
+        <ng-container *ngFor="let item of parsed">
+            <tr>
+                <td><b>{{item.name}}</b></td>
+                <td>{{item.required ? '✓' : ''}}</td>
+                <td>{{item.in}}</td>
+                <td>{{item.description}}</td>
+                <td>
+                    <pre *ngIf="isObject(item.type)" class="code language-json">{{item.type | json}}</pre>
+                    <span *ngIf="!isObject(item.type)">{{item.type}}</span>
+                </td>
+            </tr>
+        </ng-container>
+    </table>
+</ng-container>
+

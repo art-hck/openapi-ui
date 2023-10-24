@@ -1,0 +1,19 @@
+.flex {
+  display: flex;
+
+  &-column {
+    flex-direction: column;
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-shrink {
+  flex-shrink: 1;
+}
+
+.flex-auto {
+  flex-basis: auto;
+}

@@ -1,0 +1,32 @@
+.app {
+
+  &-menu {
+    line-height: 2em;
+    //height: 100%;
+    display: inline-block;
+    min-width: 100%;
+
+    &-method {
+      width: 40px;
+      font-size: 12px;
+      margin-right: .5em;
+      padding: .2rem;
+    }
+
+    a {
+      padding: 5px 1.5rem;
+      display: block;
+      color: #333;
+      white-space: nowrap;
+
+      &:hover {
+        background: #eee;
+      }
+
+      &.active {
+        background: #ddd;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,7 @@
+<ng-template #link>
+  <a (click)="loadRef$.next()">{{ref?.$ref}}</a>
+</ng-template>
+
+
+<pre class="code language-json" *ngIf="component$ | async as component; else link">{{ref?.$ref}} {{component | json}}</pre>
+
